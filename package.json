@@ -3,7 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "gen-today": "bun run gen-today.ts"
+    "gen-today": "bun run gen-today.ts",
+    "01-1": "bun run ./01/part1.ts",
+    "01-2": "bun run ./01/part2.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
