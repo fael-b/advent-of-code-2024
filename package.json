@@ -5,7 +5,9 @@
   "scripts": {
     "gen-today": "bun run gen-today.ts",
     "01-1": "bun run ./01/part1.ts",
-    "01-2": "bun run ./01/part2.ts"
+    "01-2": "bun run ./01/part2.ts",
+    "02-1": "bun run ./02/part1.ts",
+    "02-2": "bun run ./02/part2.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
