@@ -9,7 +9,9 @@
     "02-1": "bun run ./02/part1.ts",
     "02-2": "bun run ./02/part2.ts",
     "03-1": "bun run ./03/part1.ts",
-    "03-2": "bun run ./03/part2.ts"
+    "03-2": "bun run ./03/part2.ts",
+    "04-1": "bun run ./04/part1.ts",
+    "04-2": "bun run ./04/part2.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
