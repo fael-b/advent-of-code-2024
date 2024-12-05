@@ -1,30 +1,33 @@
 import { getInput } from "../lib";
-const inputPath = `${import.meta.dir}/input1.txt`;
+const inputPath = `${import.meta.dir}/input.txt`;
 const input = await getInput(inputPath);
 
-function parseInput(lines: string[]) {
+export function parseInput(lines: string[]) {
   let i = 0;
   while (i < lines.length) {
     if (lines[i].trim() === "") {
       return {
-        rules: lines.slice(0, i),
-        updates: lines.slice(i + 1, lines.length),
+        rules: lines.slice(0, i).map(parseRule),
+        updates: lines.slice(i + 1, lines.length).map(parseUpdate),
       };
     }
     i++;
   }
-  return { rules: [], updates: [] };
+  return {
+    rules: [],
+    updates: [],
+  };
 }
 
-function parseRule(rawRule: string) {
+export function parseRule(rawRule: string) {
   return rawRule.split("|") as [string, string];
 }
 
-function parseUpdate(rawUpdate: string) {
+export function parseUpdate(rawUpdate: string) {
   return rawUpdate.split(",");
 }
 
-function generateRuleset(rules: [string, string][]) {
+export function generateRuleset(rules: [string, string][]) {
   const ruleset = new Map<string, Set<string>>();
   for (const [before, after] of rules) {
     if (ruleset.has(before)) {
@@ -36,16 +39,16 @@ function generateRuleset(rules: [string, string][]) {
   return ruleset;
 }
 
-function getArrayMiddle<T>(arr: T[]) {
+export function getArrayMiddle<T>(arr: T[]) {
   return arr[Math.floor(arr.length / 2)];
 }
 
 const lines = input.split("\n");
 const { rules, updates } = parseInput(lines);
-const ruleset = generateRuleset(rules.map(parseRule));
+const ruleset = generateRuleset(rules);
 const goodUpdates = [];
 
-nextUpdate: for (const update of updates.map(parseUpdate)) {
+nextUpdate: for (const update of updates) {
   const seenPages = new Set();
   for (const page of update) {
     seenPages.add(page);
