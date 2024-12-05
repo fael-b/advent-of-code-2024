@@ -11,7 +11,9 @@
     "03-1": "bun run ./03/part1.ts",
     "03-2": "bun run ./03/part2.ts",
     "04-1": "bun run ./04/part1.ts",
-    "04-2": "bun run ./04/part2.ts"
+    "04-2": "bun run ./04/part2.ts",
+    "05-1": "bun run ./05/part1.ts",
+    "05-2": "bun run ./05/part2.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
