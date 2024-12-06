@@ -1,12 +1,11 @@
 import { getInput } from "../lib";
-const inputPath = `${import.meta.dir}/input1.txt`;
+import type { Position } from "./part2";
+const inputPath = `${import.meta.dir}/input.txt`;
 const input = await getInput(inputPath);
 
-type Direction = "up" | "down" | "left" | "right";
+export type Direction = "up" | "down" | "left" | "right";
 
-interface Guard {
-  x: number;
-  y: number;
+export interface Guard extends Position {
   direction: Direction;
 }
 
@@ -28,13 +27,11 @@ outer: for (const [i, row] of grid.entries()) {
   }
 }
 
-interface DirectionDiff {
-  x: number;
-  y: number;
+export interface DirectionDiff extends Position {
   next: Direction;
 }
 
-const directions: Record<Direction, DirectionDiff> = {
+export const directions: Record<Direction, DirectionDiff> = {
   up: {
     x: -1,
     y: 0,
@@ -57,6 +54,7 @@ const directions: Record<Direction, DirectionDiff> = {
   },
 };
 
+export const walkedPositions = new Set<string>(); // for part 2 hehe
 let i = -1;
 let isInMap = true;
 // Je comprends pas, j'ai une erreur array out of bounds mais le résultat final est bon 🤷
@@ -65,6 +63,7 @@ try {
   while (isInMap) {
     i++;
     grid[guard.x][guard.y] = "X";
+    walkedPositions.add(`${guard.x},${guard.y},${guard.direction}`);
     const directionDiff = directions[guard.direction];
     const nextCell = grid
       .at(guard.x + directionDiff.x)
@@ -83,8 +82,13 @@ try {
     }
   }
 } catch (err) {
-  console.log(`STOPPED AFTER ITER N°${i}`);
-  console.error(err);
+  // console.log(`STOPPED AFTER ITER N°${i}`);
+  // console.error(err);
+} finally {
+  console.log(
+    "Looped in part 1, walkedPositions size is",
+    walkedPositions.size,
+  );
 }
 
 const xCount = grid.reduce(
@@ -97,4 +101,4 @@ const xCount = grid.reduce(
   0,
 );
 
-console.log(grid.map((row) => row.join("")).join("\n"), xCount);
+// console.log(grid.map((row) => row.join("")).join("\n"), xCount);
